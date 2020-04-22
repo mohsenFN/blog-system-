@@ -31,6 +31,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('about__') }}">About</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('search__')}}">Search</a>
+          </li>
        </ul>
       </div>
     </div>
@@ -57,7 +60,7 @@
   {% for categ in categs %}
       <li class="list-group-item active"><a href="categ/{{ categ }}" style="color: white; font-size: 18px; text-decoration: none;" onMouseOver="this.style.color='#707b7c'" onMouseOut="this.style.color='#FFF'">{{ categ }}</a></li>
   {% endfor %}
-</ul> 
+</ul>
 </div>
 
 
@@ -74,7 +77,7 @@
         </div>
         <hr>
         {% endfor %}
-      
+
 
       </div>
     </div>
