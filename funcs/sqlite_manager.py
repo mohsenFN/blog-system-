@@ -4,7 +4,7 @@ class SQLManger:
     def __init__(self, db_name):
         self.conn = sqlite3.connect(db_name, check_same_thread=False)
         self.c = self.conn.cursor()
-    
+
     def create_table(self):
         self.c.execute("""CREATE TABLE IF NOT EXISTS posts(
             title TEXT NOT NULL,
@@ -24,7 +24,7 @@ class SQLManger:
     def get_posts(self):
         self.c.execute("SELECT * FROM posts ORDER BY date DESC")
         return self.c.fetchall()
-    
+
     def delete_post(self, post_name):
         self.c.execute("DELETE FROM posts WHERE title=?", (post_name,))
         self.conn.commit()
@@ -39,4 +39,8 @@ class SQLManger:
 
     def list_all_categs(self):
         self.c.execute("SELECT category, sub_category FROM posts")
+        return self.c.fetchall()
+
+    def search_by_title(self, key_w):
+        self.c.execute("SELECT * FROM posts WHERE title LIKE ? ",  ("%"+key_w+"%",))
         return self.c.fetchall()
