@@ -24,7 +24,7 @@ def new_post__():
             sql__.new_row(form_data["post_title"], form_data["post_subtitle"], form_data["post_id"], form_data["post_category"], form_data["post_subcategory"], datetime.now().strftime("%d %B %Y"), form_data["post_content"])
             flash('post added')
         except IntegrityError:
-            flash("choose another post name")  
+            flash("choose another post name")
 
     return render_template("admin/post.html")
 
@@ -37,7 +37,7 @@ def remove_post__():
             flash("No posts is selected !")
         else:
             sql__.delete_post(rm_post)
-            flash("Removed0")
+            flash("Removed")
 
     post_list = [post[0] for post in sql__.get_posts()]
     return render_template("admin/remove.html", ll=post_list)
