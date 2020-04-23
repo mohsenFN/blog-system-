@@ -12,6 +12,7 @@ I was looking for a free weblog creator (like blog.ir) but I couldn't find anyti
 ### All Views in this App:
 * Home-page (All posts indexed)
 * About page
+* Search page
 * View for every single post
 * View for all post in a specific category
 
