@@ -1,6 +1,6 @@
 Weblog app written in Python --> Flask 1.1.x
 
-I was looking for a free weblog creator (like blog.ir) but I couldn't find anytihng proper; so I tried to code my own blog and I ended up to hear :).
+I was looking for a free weblog creator (like blog.ir) but I couldn't find anytihng proper; so I tried to code my own blog and I ended up to here :).
 
 
 ### All Used Techs:
