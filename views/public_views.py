@@ -1,7 +1,7 @@
 from app import app
 from random import choice
 from itertools import chain
-from flask import render_template
+from flask import render_template, request
 from funcs.sqlite_manager import SQLManger
 
 
@@ -9,13 +9,13 @@ sql__ = SQLManger("mivro.db")
 sql__.create_table()
 
 headers_list = ['/static/headers/header1.png',
-                '/static/headers/header2.png', 
+                '/static/headers/header2.png',
                 '/static/headers/header3.png']
 
-                
+
 @app.route("/home")
 @app.route("/")
-def index__():    
+def index__():
     """ chaining categories and removing repeated items """
     raw_categs = (list(chain.from_iterable(sql__.list_all_categs())))
     categs = list(dict.fromkeys(raw_categs))
@@ -34,9 +34,8 @@ def posts__(post_id):
 @app.route("/categ/<categ>")
 def by_categ(categ):
 	posts = sql__.get_all_by_categ(str(categ))
-	print(len(posts))
 	if len(posts) > 0 :
-		return render_template("public/category_post.html",posts=posts, category_name=str(categ), header=choice(headers_list))
+		return render_template("public/category_post.html",posts=posts, category_name=str(categ), header=headers_list[1])
 	else:
 		return render_template("errors/category404.html", category_name=categ, header=choice(headers_list))
 
@@ -45,4 +44,10 @@ def by_categ(categ):
 def about__():
     return render_template("public/about.html", header=choice(headers_list))
 
+@app.route("/search", methods=["POST", "GET"])
+def search__():
+    if request.method == "GET":
+        return render_template("public/search.html",header=headers_list[0], index_results = False)
 
+    results = sql__.search_by_title(request.form["key_"])
+    return render_template("public/search.html", posts=results, result_length=len(results), header=headers_list[0], index_results = 1)
